@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -8,14 +8,14 @@ using System.Threading.Tasks;
 
 namespace VM
 {
-    class callStack
+    class CallStack
     {
         public int pc;
         public int sp;
         public int ret;
         public int args;
 
-        public callStack(int pc, int sp, int ret, int args)
+        public CallStack(int pc, int sp, int ret, int args)
         {
             this.pc = pc;
             this.sp = sp;
@@ -34,7 +34,7 @@ namespace VM
 
         private int[] stack = new int[100];
         private int[] memory = new int[100];
-        private callStack[] callStack = new callStack[100];
+        private CallStack[] callStack = new CallStack[100];
 
         public VM(byte[] bytecode)
         {
@@ -284,7 +284,7 @@ namespace VM
                             var ret = GetInt16(pc + sizeof(short));
                             var args = GetInt16(pc + sizeof(short) * 2);
 
-                            callStack[++fp] = new callStack(pc + sizeof(short) * 3, sp, ret, args);
+                            callStack[++fp] = new CallStack(pc + sizeof(short) * 3, sp, ret, args);
 
                             pc = loc;
 
